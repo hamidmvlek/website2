@@ -7,8 +7,8 @@ html {
 
 body {
     background-color: #f2f2f2;
-    background-image: url("bg-1920.jpg");
-    background-image: image-set(url("bg-1920.webp") type("image/webp"), url("bg-1920.jpg") type("image/jpeg"));
+    background-image: url("bg-2400.jpg");
+    background-image: image-set(url("bg-2400.webp") type("image/webp"), url("bg-2400.jpg") type("image/jpeg"));
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -25,10 +25,12 @@ body {
     overflow: hidden;
 }
 
-@media (max-width: 1000px) {
+/* Portrait phones/tablets and retina screens stretch the photo much more,
+   so give them the full-resolution version */
+@media (orientation: portrait), (min-resolution: 1.5dppx), (min-width: 2400px) {
     body {
-        background-image: url("bg-1000.jpg");
-        background-image: image-set(url("bg-1000.webp") type("image/webp"), url("bg-1000.jpg") type("image/jpeg"));
+        background-image: url("bg-4875.jpg");
+        background-image: image-set(url("bg-4875.webp") type("image/webp"), url("bg-4875.jpg") type("image/jpeg"));
     }
 }
 

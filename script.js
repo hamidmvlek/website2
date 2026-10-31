@@ -1,5 +1,5 @@
 const links = [
-  { text: "link", url: "#" },
+  { text: "red pen", url: "red-pen/" },
   { text: "link", url: "#" },
   { text: "link", url: "#" },
   { text: "link", url: "#" },

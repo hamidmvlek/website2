@@ -22,9 +22,12 @@
     inset: 0;
     display: grid;
     place-items: center;
-    padding-block: max(24px, env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-bottom, 0px));
-    padding-left: max(16px, 7.5vw, env(safe-area-inset-left, 0px));
-    padding-right: max(16px, 7.5vw, env(safe-area-inset-right, 0px));
+    align-content: center;
+    justify-content: center;
+    /* Same space on every side so the sheet sits dead center, even with a notch. */
+    padding-block: max(24px, env(safe-area-inset-top, 0px), env(safe-area-inset-bottom, 0px));
+    padding-left: max(16px, 7.5vw, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+    padding-right: max(16px, 7.5vw, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
     cursor: crosshair;
     background: var(--void);
   }

@@ -1,6 +1,8 @@
 html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    overflow: hidden; /* the rotating ring's corners must never cause scrolling */
+    overscroll-behavior: none;
 }
 
 body {
@@ -11,6 +13,8 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     margin: 0;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    box-sizing: border-box;
     min-height: 100vh;
     min-height: 100dvh; /* accounts for mobile browser toolbars */
     font-family: Arial, Helvetica, sans-serif;
@@ -18,7 +22,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 @media (max-width: 1000px) {
@@ -29,24 +33,12 @@ body {
 }
 
 .container {
-    --size: 70vmin;
+    --size: 56vmin; /* fallback; script.js fits this to the screen */
+    --fs: clamp(14px, 2vmin, 18px);
     position: relative;
+    flex: none;
     width: var(--size); /* responsive size */
     height: var(--size); /* same as width for a circle */
-}
-
-/* Phones: use more of the screen so the ring clears the centre text */
-@media (max-width: 600px) {
-    .container {
-        --size: min(96vw, 96vh);
-    }
-}
-
-/* Short landscape screens: keep the ring fully visible */
-@media (max-height: 500px) and (orientation: landscape) {
-    .container {
-        --size: 94vh;
-    }
 }
 
 .center {
@@ -61,13 +53,23 @@ body {
 
 .center p,
 .center a {
-    margin: 4px;
-    font-size: clamp(13px, 2.2vmin, 18px);
+    margin: 0.25em 0;
+    font-size: var(--fs);
+    line-height: 1.25;
     color: #222;
+}
+
+.center a {
+    display: inline-block;
+}
+
+.center br {
+    line-height: 0.6;
 }
 
 .center a,
 .rotating-link a {
+    -webkit-tap-highlight-color: transparent;
     color: #3366ff;
     text-decoration: underline;
 }
@@ -102,7 +104,8 @@ body {
 .rotating-link a {
     display: inline-block;
     padding: 6px; /* bigger tap target on touch screens */
-    font-size: clamp(13px, 2.2vmin, 18px);
+    font-size: var(--fs);
+    line-height: 1.25;
 }
 
 @media (prefers-reduced-motion: reduce) {

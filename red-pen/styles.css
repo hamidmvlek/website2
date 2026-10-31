@@ -1,0 +1,54 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  /* Layout: one fixed sheet floating centered on pure black, like a photo held up in a viewer. */
+  :root {
+    --void: #000000;
+    --edge: #1a1a1a;
+    --paper: #a9bfd4;
+    color-scheme: dark;
+  }
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+    background: var(--void);
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #stage {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    justify-content: center;
+    /* Same space on every side so the sheet sits dead center, even with a notch. */
+    padding-block: max(24px, env(safe-area-inset-top, 0px), env(safe-area-inset-bottom, 0px));
+    padding-left: max(16px, 7.5vw, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+    padding-right: max(16px, 7.5vw, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+    cursor: crosshair;
+    background: var(--void);
+  }
+  @media (min-width: 700px) {
+    #stage { padding-block: 40px; padding-left: 40px; padding-right: 40px; }
+  }
+  #frame {
+    position: relative;
+    max-width: 100%;
+    background: var(--paper);
+    outline: 1px solid var(--edge);
+    line-height: 0;
+  }
+  #bg, #ink {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+  }
+  #bg { object-fit: fill; }
+  /* Multiply lets the paper grain show through the red, like graphite-style pencil on paper. */
+  #ink { mix-blend-mode: multiply; }

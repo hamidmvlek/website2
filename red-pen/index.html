@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#000000" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="mobile-web-app-capable" content="yes" />
+<title>Red Pen</title>
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="preload" as="image" href="background.webp" type="image/webp" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<main id="stage">
+  <div id="frame">
+    <picture>
+      <source srcset="background.webp" type="image/webp">
+      <img id="bg" src="background.jpg" width="1068" height="1473" alt="Pen drawing on blue paper" draggable="false">
+    </picture>
+    <canvas id="ink" aria-label="Drawing surface: click or touch to draw in red"></canvas>
+  </div>
+</main>
+<script src="script.js" defer></script>
+</body>
+</html>

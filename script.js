@@ -28,29 +28,18 @@ function createLinks() {
   });
 }
 
-// Update their positions without killing animation
-function updateLinkPositions() {
-  const container = document.querySelector(".container");
-  const containerWidth = container.offsetWidth;
-  const containerHeight = container.offsetHeight;
-
-  const radius = containerWidth * 0.4;
-  const centerX = containerWidth / 2;
-  const centerY = containerHeight / 2;
+// Position links in percentages so they follow the container on any
+// screen size without needing to recalculate on resize
+function setLinkPositions() {
+  const radius = 40; // % of container width
 
   rotatingLinks.forEach((wrapper, i) => {
     const angle = (i / links.length) * 2 * Math.PI;
-    const x = centerX + radius * Math.cos(angle);
-    const y = centerY + radius * Math.sin(angle);
-
-    wrapper.style.left = `${x}px`;
-    wrapper.style.top = `${y}px`;
+    wrapper.style.left = `${50 + radius * Math.cos(angle)}%`;
+    wrapper.style.top = `${50 + radius * Math.sin(angle)}%`;
   });
 }
 
 // Init
 createLinks();
-updateLinkPositions();
-
-// Reposition only on resize
-window.addEventListener("resize", updateLinkPositions);
+setLinkPositions();

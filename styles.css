@@ -1,23 +1,54 @@
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 body {
-    background-image: url("12.png");
+    background-color: #f2f2f2;
+    background-image: url("bg-1920.jpg");
+    background-image: image-set(url("bg-1920.webp") type("image/webp"), url("bg-1920.jpg") type("image/jpeg"));
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     margin: 0;
-    height: 100vh;
-    font-family: arial;
+    min-height: 100vh;
+    min-height: 100dvh; /* accounts for mobile browser toolbars */
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow-x: hidden;
+}
+
+@media (max-width: 1000px) {
+    body {
+        background-image: url("bg-1000.jpg");
+        background-image: image-set(url("bg-1000.webp") type("image/webp"), url("bg-1000.jpg") type("image/jpeg"));
+    }
 }
 
 .container {
+    --size: 70vmin;
     position: relative;
-    width: 70vmin; /* responsive size */
-    height: 70vmin; /* same as width for a circle */
+    width: var(--size); /* responsive size */
+    height: var(--size); /* same as width for a circle */
 }
+
+/* Phones: use more of the screen so the ring clears the centre text */
+@media (max-width: 600px) {
+    .container {
+        --size: min(96vw, 96vh);
+    }
+}
+
+/* Short landscape screens: keep the ring fully visible */
+@media (max-height: 500px) and (orientation: landscape) {
+    .container {
+        --size: 94vh;
+    }
+}
+
 .center {
     position: absolute;
     top: 50%;
@@ -25,18 +56,31 @@ body {
     transform: translate(-50%, -50%);
     text-align: center;
     z-index: 2;
+    white-space: nowrap;
 }
 
 .center p,
 .center a {
     margin: 4px;
-    font-size: 16px;
+    font-size: clamp(13px, 2.2vmin, 18px);
     color: #222;
 }
 
-.center a {
+.center a,
+.rotating-link a {
     color: #3366ff;
     text-decoration: underline;
+}
+
+.center a:hover,
+.rotating-link a:hover {
+    color: #0033cc;
+}
+
+.center a:focus-visible,
+.rotating-link a:focus-visible {
+    outline: 2px solid #3366ff;
+    outline-offset: 2px;
 }
 
 .circle {
@@ -46,6 +90,7 @@ body {
     top: 0;
     left: 0;
     animation: rotate 120s linear infinite;
+    will-change: transform;
 }
 
 .rotating-link {
@@ -55,9 +100,16 @@ body {
 }
 
 .rotating-link a {
-    font-size: 16px;
-    color: #3366ff;
-    text-decoration: underline;
+    display: inline-block;
+    padding: 6px; /* bigger tap target on touch screens */
+    font-size: clamp(13px, 2.2vmin, 18px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .circle,
+    .rotating-link {
+        animation: none;
+    }
 }
 
 @keyframes rotate {
